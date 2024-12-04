@@ -11,3 +11,39 @@
 
 ## link Website
 <p> brevemente
+
+# Planeamento do Projeto
+
+## Objetivo
+Criar uma plataforma online para colecionadores gerirem as suas coleções e comercializarem itens.
+
+---
+
+## Funcionalidades Principais
+
+### 1. Gestão de Coleções
+- [ ] Criar, editar e remover coleções.
+- [ ] Adicionar, editar e remover itens dentro das coleções.
+- [ ] Filtrar e pesquisar itens por categoria, valor ou outros atributos.
+
+---
+
+### 2. Comércio de Itens Colecionáveis
+- [ ] Listar itens para venda.
+- [ ] Informar o estado do item, o preço e a quantidade no momento da publicação.
+- [ ] Sistema de avaliação para os compradores avaliarem a experiência com os vendedores.
+- [ ] Histórico de transações.
+
+---
+
+### 3. Multiutilizador
+- [ ] Registo e início de sessão de utilizadores com autenticação segura (hash de palavra-passe).
+- [ ] Diferentes permissões (utilizador comum, administrador).
+
+---
+
+### 4. Interação e Comunidade
+- [ ] Área dedicada a discussões sobre coleções entre colecionadores.
+- [ ] Possibilidade de iniciar conversas para procurar itens específicos, mesmo que não estejam à venda.
+- [ ] Espaço para combinar encontros para jogar TCG ou outras atividades relacionadas com coleções.
+
