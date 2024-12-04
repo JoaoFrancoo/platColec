@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../models/Collection.php';
+require_once __DIR__ . '/../models/collection.php';
 
 class CollectionController
 {

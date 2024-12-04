@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Site de Colecionismo</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
 <header>
@@ -21,8 +21,8 @@
             </ul>
         </nav>
         <div class="user-menu">
-            <a href="/login.php">Entrar</a>
-            <a href="/register.php">Registrar</a>
+            <a href="/auth/login.php">Entrar</a>
+            <a href="/auth/register.php">Registrar</a>
         </div>
     </div>
 </header>
