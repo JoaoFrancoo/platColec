@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php';
+require("public/models/db.php");
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,9 +20,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
 <form method="post" action="">
     <input type="email" name="email" placeholder="E-mail" required>
     <input type="password" name="password" placeholder="Senha" required>
     <button type="submit">Entrar</button>
 </form>
+
+</body>
+</html>

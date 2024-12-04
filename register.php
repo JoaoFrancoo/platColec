@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php';
+require_once 'public/models/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -17,10 +17,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registar</title>
+</head>
+<body>
 <form method="post" action="">
-    <input type="text" name="username" placeholder="Nome de Usuário" required>
+    <input type="text" name="username" placeholder="Nome de utilizador" required>
     <input type="email" name="email" placeholder="E-mail" required>
     <input type="password" name="password" placeholder="Senha" required>
     <button type="submit">Registrar</button>
 </form>
+
+</body>
+</html>

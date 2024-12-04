@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php';
+require_once '../models/db.php';
 
 $sql = "SELECT c.id, c.name, c.description, u.username 
         FROM collections c 
