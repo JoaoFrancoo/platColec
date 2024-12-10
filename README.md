@@ -3,7 +3,7 @@
 
 ## Tecnologias
 
-<p> - HTML,CSS, MySQL, JavaScript
+<p> - HTML,CSS, MySQL, JavaScript e PHP
   
 ## Funcionalidades
 
