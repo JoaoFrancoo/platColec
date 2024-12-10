@@ -29,7 +29,7 @@ Criar uma plataforma online para colecionadores gerirem as suas coleções e com
 ---
 
 ### 2. Comércio de Itens Colecionáveis
-- [ ] Listar itens para venda.
+- [x] Listar itens para venda.
 - [ ] Informar o estado do item, o preço e a quantidade no momento da publicação.
 - [ ] Sistema de avaliação para os compradores avaliarem a experiência com os vendedores.
 - [ ] Histórico de transações.
