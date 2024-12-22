@@ -33,7 +33,7 @@ class Router
         $action = $route['action'];
 
         // Instancia o controlador passando o $pdo
-        $controller = new $controllerName($this->pdo);
+        $controller = new \App\Controllers\CollectionController($this->pdo);
 
         if (!method_exists($controller, $action)) {
             http_response_code(404);
