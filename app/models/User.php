@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use app\config\Database;
+use App\Config\Database;
 use PDO;
 
 class User {

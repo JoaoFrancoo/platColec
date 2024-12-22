@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use app\config\Database;
 use PDO;
 
 class Collection
 {
     private $pdo;
 
-    public function __construct()
+    public function __construct($pdo)
     {
-        $this->pdo = Database::getConnection();
+        $this->pdo = $pdo; // Recebe a conexão PDO no momento da inicialização
     }
 
     // Retorna todas as coleções
@@ -25,7 +24,7 @@ class Collection
     public function getCollectionById($id)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM collections WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);

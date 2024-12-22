@@ -2,43 +2,45 @@
 
 namespace App\Core;
 
+use App\Config\Database;
+use App\Controllers\CollectionController;
+use App\Controllers\AuthController;
+
 class Router
 {
     private $routes;
+    private $pdo;
 
     public function __construct($routes)
     {
         $this->routes = $routes;
-    }
 
-    public function match($url)
-    {
-        $url = trim($url, '/'); // Remove barras no início/fim da URL
-        return $this->routes[$url] ?? false;
+        // Inicialize a conexão com o banco de dados
+        $db = new Database();
+        $this->pdo = $db->getConnection();
     }
 
     public function dispatch($url)
     {
-        $route = $this->match($url);
-
-        if ($route) {
-            $controllerName = 'App\\Controllers\\' . $route['controller'];
-            $action = $route['action'];
-
-            if (class_exists($controllerName)) {
-                $controller = new $controllerName();
-
-                if (method_exists($controller, $action)) {
-                    $controller->$action();
-                    return;
-                } else {
-                    echo "Erro 404: Método <strong>$action</strong> não encontrado no controlador <strong>$controllerName</strong>.";
-                }
-            } else {
-                echo "Erro 404: Controlador <strong>$controllerName</strong> não existe.";
-            }
-        } else {
-            echo "Erro 404: Rota não encontrada!";
+        if (!isset($this->routes[$url])) {
+            http_response_code(404);
+            echo "Página não encontrada.";
+            return;
         }
+
+        $route = $this->routes[$url];
+        $controllerName = 'app\\controllers\\' . $route['controller'];
+        $action = $route['action'];
+
+        // Instancia o controlador passando o $pdo
+        $controller = new $controllerName($this->pdo);
+
+        if (!method_exists($controller, $action)) {
+            http_response_code(404);
+            echo "Ação não encontrada.";
+            return;
+        }
+
+        $controller->$action();
     }
 }

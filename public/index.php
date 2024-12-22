@@ -1,12 +1,12 @@
 <?php
 
-use App\Core\Router;
-
-// Carrega o autoload do Composer (se usar namespaces)
+session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use App\Core\Router;
+
 // Carrega as rotas
-$routes = require_once __DIR__ . '/../app/config/routes.php';
+$routes = require __DIR__ . '/../app/config/routes.php';
 
 // Inicializa o roteador
 $router = new Router($routes);
@@ -15,4 +15,4 @@ $router = new Router($routes);
 $url = $_GET['url'] ?? '';
 
 // Despacha a rota
-$router->dispatch($url);
+$router->dispatch($_GET['$url']??'');

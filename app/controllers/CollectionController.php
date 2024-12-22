@@ -1,38 +1,30 @@
 <?php
 
-namespace app\controllers;
+namespace App\Controllers;
 
-use app\models\collection;
-use app\models\User;
-
+use App\Models\Collection;
+use App\Config\Database;
+use App\Models\User;
 
 class CollectionController
 {
     private $collectionModel;
 
-    // Injeção de dependência do PDO
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->collectionModel = new Collection($pdo);
+        $db = new \App\Config\Database();
+        $this->collectionModel = new Collection($db->getConnection());
     }
 
-    // Método para exibir todas as coleções
     public function index()
     {
         $collections = $this->collectionModel->getAllCollections();
-        require __DIR__ . '/../views/collections/home.php';
+        $this->renderView('collections/viewCollections', ['collections' => $collections]);
     }
 
-    // Método adicional para exibir uma coleção específica
-    public function show($id)
+    private function renderView($view, $data = [])
     {
-        $collection = $this->collectionModel->getCollectionById($id);
-
-        if (!$collection) {
-            echo "Coleção não encontrada.";
-            return;
-        }
-
-        require __DIR__ . '/../views/collections/viewCollections.php';
+        extract($data);
+        require __DIR__ . "/../views/{$view}.php";
     }
 }

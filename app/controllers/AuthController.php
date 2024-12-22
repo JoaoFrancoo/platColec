@@ -1,9 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace App\controllers;
 
-use app\config\Database;
-use app\models\User;
+use App\Config\Database;
+$pdo = Database::getConnection();
+use App\Models\User;
 use PDOException;
 
 class AuthController
@@ -65,6 +66,15 @@ class AuthController
         // Renderiza a view
         $this->renderView('auth/login', ['message' => $message]);
     }
+
+    public function logout()
+{
+    session_start();
+    session_destroy();
+    header("Location: /");
+    exit;
+}
+
 
     private function renderView($view, $data = [])
     {
