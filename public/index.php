@@ -15,4 +15,5 @@ $router = new Router($routes);
 $url = $_GET['url'] ?? '';
 
 // Despacha a rota
-$router->dispatch($_GET['$url']??'');
+$router->dispatch($url);
+
