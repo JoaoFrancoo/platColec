@@ -24,7 +24,10 @@ return [
     'items/store' => [
         'controller' => 'ItemController', 
         'action' => 'store' 
+    ],
+    'item/show/(\d+)' => [
+        'controller' => 'ItemController', 
+        'action' => 'show' 
     ]
 ];
-
 ?>

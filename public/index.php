@@ -1,20 +1,28 @@
 <?php
 
-$routes = require_once '../app/config/routes.php'; 
+$routes = require '../app/config/routes.php';
+$uri = trim($_SERVER['REQUEST_URI'], '/');
 
-$route = trim($_SERVER['REQUEST_URI'], '/');
+foreach ($routes as $route => $routeParams) {
+    // Verifique se a rota corresponde a um padrão dinâmico
+    $pattern = '#^' . $route . '$#';
+    if (preg_match($pattern, $uri, $matches)) {
+        $controller = $routeParams['controller'];
+        $action = $routeParams['action'];
 
-if (array_key_exists($route, $routes)){
-    $controllerName = $routes[$route]['controller'];
-    $actionName = $routes[$route]['action'];
+        require_once "../app/controllers/$controller.php";
+        $controllerInstance = new $controller();
 
-    require_once '../app/controllers/' . $controllerName . '.php';  
-    $controller = new $controllerName();
-    $controller->$actionName();
-
-} else {
-    http_response_code(404);
-    echo "Página não encontrada";
+        // Passe o ID capturado para o método do controlador
+        if (isset($matches[1])) {
+            $controllerInstance->$action($matches[1]);
+        } else {
+            $controllerInstance->$action();
+        }
+        exit;
+    }
 }
 
+// Exiba uma mensagem de erro se a rota não for encontrada
+echo "Página não encontrada";
 ?>

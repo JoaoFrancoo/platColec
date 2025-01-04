@@ -9,13 +9,25 @@ class ItemModel {
         $this->db = Database::getInstance()->getConnection();
     }
 
-    public function getAllItems() {
-        $query = "SELECT * FROM items";
+    public function getAllItemsWithCollections() {
+        $query = "SELECT items.*, collections.name AS collection_name FROM items 
+                  JOIN collections ON items.collection_id = collections.id";
         return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getItemById($id) {
+        $query = "SELECT items.*, collections.name AS collection_name FROM items 
+                  JOIN collections ON items.collection_id = collections.id 
+                  WHERE items.id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function createItem($data) {
-        $query = "INSERT INTO items (name, description, collection_id, value, image_url) VALUES (:name, :description, :collection_id, :value, :image_url)";
+        $query = "INSERT INTO items (name, description, collection_id, value, image_url) 
+                  VALUES (:name, :description, :collection_id, :value, :image_url)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':description', $data['description']);
@@ -25,5 +37,4 @@ class ItemModel {
         $stmt->execute();
     }
 }
-
 ?>
