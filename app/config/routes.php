@@ -2,27 +2,29 @@
 
 return [
     '' => [
-        'controller' => 'CollectionController',
-        'action' => 'index'
+        'controller' => 'HomePageController', 
+        'action' => 'index' 
     ],
-    'collections' => [
-        'controller' => 'CollectionController',
-        'action' => 'index'
+    'colecoes' => [
+        'controller' => 'ColecaoController', 
+        'action' => 'index' 
     ],
-    'collections/view' => [
-        'controller' => 'CollectionController',
-        'action' => 'view'
+    'colecoes/create' => [
+        'controller' => 'ColecaoController', 
+        'action' => 'create' 
     ],
-    'auth/login' => [
-        'controller' => 'AuthController',
-        'action' => 'login'
+    'items' => [
+        'controller' => 'ItemController', 
+        'action' => 'index' 
     ],
-    'auth/register' => [
-        'controller' => 'AuthController',
-        'action' => 'register'
+    'items/create' => [
+        'controller' => 'ItemController', 
+        'action' => 'create' 
     ],
-    'collections/show' => [
-        'controller' => 'CollectionController',
-        'action' => 'show'
-    ],
+    'items/store' => [
+        'controller' => 'ItemController', 
+        'action' => 'store' 
+    ]
 ];
+
+?>

@@ -1,38 +1,34 @@
 <?php
 
-namespace App\config;
+class Database {
+    private static $instance = null;
+    private $connection;
 
-use PDO;
-use PDOException;
-
-class Database
-{
-    private $pdo;
-
-    public function __construct()
-    {
+    private function __construct() {
         $host = 'localhost';
-        $db = 'colecionismo';
-        $user = 'root';
-        $pass = '';
-        $charset = 'utf8mb4';
-
-        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ];
+        $dbname = 'colecionismo';
+        $username = 'root'; 
+        $password = '';
 
         try {
-            $this->pdo = new PDO($dsn, $user, $pass, $options);
+            $this->connection = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+            echo "Connection failed: " . $e->getMessage();
         }
     }
 
-    public function getConnection()
-    {
-        return $this->pdo;
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+
+        return self::$instance;
+    }
+
+    public function getConnection() {
+        return $this->connection;
     }
 }
+
+?>

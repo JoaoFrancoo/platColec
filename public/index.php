@@ -1,19 +1,20 @@
 <?php
 
-session_start();
-require_once __DIR__ . '/../vendor/autoload.php';
+$routes = require_once '../app/config/routes.php'; 
 
-use App\Core\Router;
+$route = trim($_SERVER['REQUEST_URI'], '/');
 
-// Carrega as rotas
-$routes = require __DIR__ . '/../app/config/routes.php';
+if (array_key_exists($route, $routes)){
+    $controllerName = $routes[$route]['controller'];
+    $actionName = $routes[$route]['action'];
 
-// Inicializa o roteador
-$router = new Router($routes);
+    require_once '../app/controllers/' . $controllerName . '.php';  
+    $controller = new $controllerName();
+    $controller->$actionName();
 
-// Captura a URL atual
-$url = $_GET['url'] ?? '';
+} else {
+    http_response_code(404);
+    echo "Página não encontrada";
+}
 
-// Despacha a rota
-$router->dispatch($url);
-
+?>
