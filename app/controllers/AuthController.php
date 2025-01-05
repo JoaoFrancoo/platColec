@@ -2,13 +2,22 @@
 
 namespace App\controllers;
 
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/User.php';
+
 use App\Config\Database;
-$pdo = Database::getConnection();
 use App\Models\User;
 use PDOException;
 
 class AuthController
 {
+    private $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = Database::getInstance()->getConnection();
+    }
+
     public function register()
     {
         $message = '';
@@ -32,8 +41,6 @@ class AuthController
                 $message = "Preencha todos os campos!";
             }
         }
-
-        // Renderiza a view
         $this->renderView('auth/register', ['message' => $message]);
     }
 
@@ -53,7 +60,7 @@ class AuthController
                     session_start();
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
-                    header("Location: /"); // Redireciona para a página inicial
+                    header("Location: /");
                     exit;
                 } else {
                     $message = "E-mail ou senha inválidos.";
@@ -62,19 +69,16 @@ class AuthController
                 $message = "Preencha todos os campos!";
             }
         }
-
-        // Renderiza a view
         $this->renderView('auth/login', ['message' => $message]);
     }
 
     public function logout()
-{
-    session_start();
-    session_destroy();
-    header("Location: /");
-    exit;
-}
-
+    {
+        session_start();
+        session_destroy();
+        header("Location: /");
+        exit;
+    }
 
     private function renderView($view, $data = [])
     {

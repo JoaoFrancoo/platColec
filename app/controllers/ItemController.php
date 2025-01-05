@@ -1,7 +1,7 @@
 <?php
 
-require_once '../app/models/ItemModel.php';
-require_once '../app/models/CollectionModel.php';
+require_once __DIR__ . '/../models/ItemModel.php';
+
 
 class ItemController {
     private $itemModel;
@@ -14,18 +14,18 @@ class ItemController {
 
     public function index() {
         $items = $this->itemModel->getAllItemsWithCollections();
-        require '../app/views/itemsView.php';
+        require __DIR__ . '/../views/items/itemsView.php';
     }
 
     public function create() {
         $collections = $this->collectionModel->getAllCollections();
-        require '../app/views/itemsCreateView.php';
+        require __DIR__ . '/../views/items/itemsCreateView.php';
     }
 
     public function store() {
         $image = $_FILES['image'];
 
-        $target_dir = "../public/uploads/";
+        $target_dir = __DIR__ . '/../../public/uploads/';
         $target_file = $target_dir . basename($image["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -66,7 +66,6 @@ class ItemController {
 
     public function show($id) {
         $item = $this->itemModel->getItemById($id);
-        require '../app/views/itemDetailView.php';
+        require __DIR__ . '/../views/items/itemDetailView.php';
     }
 }
-?>

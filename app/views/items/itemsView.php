@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100 p-6">
     <h1 class="text-2xl font-bold mb-4">Items</h1>
-    <a href="/item/create" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Create New Item</a>
+    <a href="/items/create" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Create New Item</a>
     <ul class="space-y-4">
         <?php foreach ($items as $item): ?>
             <li class="bg-white p-6 rounded shadow-md">

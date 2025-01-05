@@ -1,10 +1,9 @@
-<?php 
-class HomePageController{
+<?php
 
-    public function index(){
-        require_once '../app/views/homePageView.php';
+namespace App\controllers;
+
+class HomePageController {
+    public function index() {
+        require_once __DIR__ . '/../views/homePageView.php';
     }
-
 }
-
-?>

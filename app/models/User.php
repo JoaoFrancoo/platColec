@@ -9,7 +9,8 @@ class User {
     private $pdo;
 
     public function __construct() {
-        $this->pdo = Database::getConnection(); 
+        $database = Database::getInstance(); // Obtenha a instância do Database
+        $this->pdo = $database->getConnection(); // E então obtenha a conexão
     }
 
     public function create($username, $email, $password) 

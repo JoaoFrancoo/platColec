@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/../../layout/header.php'; ?>
+
 
 <div class="container">
     <h1>Login</h1>
@@ -10,4 +10,3 @@
     </form>
 </div>
 
-<?php require_once __DIR__ . '/../../layout/footer.php'; ?>

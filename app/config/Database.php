@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Config;
+
+use PDO;
+use PDOException;
+
 class Database {
     private static $instance = null;
     private $connection;
@@ -14,15 +19,14 @@ class Database {
             $this->connection = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            die("Erro ao conectar ao banco de dados: " . $e->getMessage());
         }
     }
 
     public static function getInstance() {
-        if (self::$instance == null) {
-            self::$instance = new Database();
+        if (self::$instance === null) {
+            self::$instance = new self();
         }
-
         return self::$instance;
     }
 
@@ -30,5 +34,3 @@ class Database {
         return $this->connection;
     }
 }
-
-?>
