@@ -1,9 +1,13 @@
 <?php
 
-require_once '../app/models/CollectionsModel.php';
+namespace App\Controllers;
+
+use App\Models\CollectionModel;
 
 class CollectionController {
     private $collectionModel;
+
+    
 
     public function __construct() {
         $this->collectionModel = new CollectionModel();
@@ -11,11 +15,11 @@ class CollectionController {
 
     public function index() {
         $collections = $this->collectionModel->getAllCollections();
-        require '../app/views/collectionsView.php';
+        require __DIR__ . '/../views/collections/collectionsView.php';
     }
 
     public function create() {
-        require '../app/views/collectionsCreateView.php';
+        require __DIR__ . '/../views/collections/collectionsCreateView.php';
     }
 
     public function store() {
@@ -31,7 +35,7 @@ class CollectionController {
 
     public function show($id) {
         $collection = $this->collectionModel->getCollectionById($id);
-        require '../app/views/collectionDetailView.php';
+        require __DIR__ . '/../views/collections/collectionDetailView.php';
     }
 }
 ?>

@@ -1,6 +1,9 @@
 <?php
 
-require_once '../app/config/Database.php';
+namespace App\Models;
+
+use App\Config\Database;
+use PDO;
 
 class ItemModel {
     private $db;

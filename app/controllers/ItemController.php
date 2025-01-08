@@ -1,6 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../models/ItemModel.php';
+namespace App\Controllers;
+
+use App\Models\ItemModel;
+use App\Models\CollectionModel;
 
 
 class ItemController {
