@@ -1,0 +1,19 @@
+{
+  "name": "platcolec",
+  "version": "1.0.0",
+  "description": "A PlatColec é a plataforma perfeita para colecionadores, já que permite a um colecionador perguntar por um produto específico e o que ele pode oferecer em troca. Além disso, conta com a funcionalidade de uma loja para que diversas pessoas possam visualizar produtos à venda.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+  
+}
