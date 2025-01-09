@@ -18,8 +18,6 @@ A PlatColec é a plataforma perfeita para colecionadores, já que permite a um c
 
 A PlatColec terá como funcionalidade principal a venda de produtos. A plataforma permitirá que os utilizadores publiquem os itens que desejam vender, informando o estado do item, o preço e a quantidade. Também haverá um sistema de avaliação para que os compradores possam avaliar a experiência de compra com o vendedor.
 
-Além disso, será possível interagir com outros colecionadores numa área dedicada a discussões sobre coleções. Por exemplo, se alguém estiver à procura de uma carta específica, como a **Charizard EX**, um colecionador poderá iniciar uma conversa para perguntar se alguém tem essa carta, mesmo que ela não esteja à venda. Essa área também poderá ser usada para combinar encontros e jogar **TCG**.
-
 ---
 
 ## Link para o Website
