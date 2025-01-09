@@ -29,9 +29,21 @@ return [
         'controller' => 'CollectionController',
         'action' => 'store'
     ],
-    'collections/show/(\d+)' => [
+    'collection/show/(\d+)' => [
         'controller' => 'CollectionController',
         'action' => 'show'
+    ],
+    'collections/(\d+)/items' => [
+        'controller' => 'CollectionController',
+        'action' => 'showCollectionItems'
+    ],
+    'profile' => [
+        'controller' => 'CollectionController',
+        'action' => 'profile'
+    ],
+    'profile/transactions' => [
+        'controller' => 'CollectionController',
+        'action' => 'transactionHistory'
     ],
     'items' => [
         'controller' => 'ItemController',
@@ -48,5 +60,21 @@ return [
     'items/show/(\d+)' => [
         'controller' => 'ItemController',
         'action' => 'show'
+    ],
+    'market/items' => [
+        'controller' => 'ItemController',
+        'action' => 'showMarketItems'
+    ],
+    'items/edit/(\d+)' => [
+        'controller' => 'ItemController',
+        'action' => 'edit'
+    ],
+    'items/update' => [
+        'controller' => 'ItemController',
+        'action' => 'update'
+    ],
+    'market/buy' => [
+        'controller' => 'ItemController',
+        'action' => 'buy'
     ]
 ];

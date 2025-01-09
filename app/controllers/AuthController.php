@@ -80,6 +80,12 @@ class AuthController
         exit;
     }
 
+    public static function getAuthenticatedUserId()
+    {
+        session_start();
+        return $_SESSION['user_id'] ?? null;
+    }
+
     private function renderView($view, $data = [])
     {
         extract($data);

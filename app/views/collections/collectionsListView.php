@@ -15,8 +15,7 @@
                 <h2 class="text-xl font-bold"><?php echo htmlspecialchars($collection['name']); ?></h2>
                 <p class="text-gray-700"><?php echo htmlspecialchars($collection['description']); ?></p>
                 <p class="text-gray-700"><strong>User ID:</strong> <?php echo htmlspecialchars($collection['user_id']); ?></p>
-                <p class="text-gray-700"><strong>Users:</strong> <?php echo htmlspecialchars($collection['users']); ?></p>
-                <a href="/collection/show/<?php echo htmlspecialchars($collection['id']); ?>" class="text-blue-500 mt-2 inline-block">View Details</a>
+                <a href="/collections/show/<?php echo htmlspecialchars($collection['collection_id']); ?>" class="text-blue-500 mt-2 inline-block">View Details</a>
             </li>
         <?php endforeach; ?>
     </ul>

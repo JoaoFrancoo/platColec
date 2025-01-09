@@ -20,17 +20,13 @@
         </div>
 
         <div class="mb-4">
-            <label for="collection_id" class="block text-gray-700">Collection:</label>
-            <select id="collection_id" name="collection_id" required class="w-full p-2 border border-gray-300 rounded mt-1">
-                <?php foreach ($collections as $collection): ?>
-                    <option value="<?php echo htmlspecialchars($collection['id']); ?>"><?php echo htmlspecialchars($collection['name']); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <label for="value" class="block text-gray-700">Value:</label>
+            <input type="number" step="0.01" id="value" name="value" required class="w-full p-2 border border-gray-300 rounded mt-1">
         </div>
 
         <div class="mb-4">
-            <label for="value" class="block text-gray-700">Value:</label>
-            <input type="number" step="0.01" id="value" name="value" required class="w-full p-2 border border-gray-300 rounded mt-1">
+            <label for="stock" class="block text-gray-700">Stock (optional):</label>
+            <input type="number" id="stock" name="stock" class="w-full p-2 border border-gray-300 rounded mt-1">
         </div>
 
         <div class="mb-4">
