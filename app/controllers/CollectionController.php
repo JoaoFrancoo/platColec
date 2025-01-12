@@ -101,4 +101,51 @@ class CollectionController
         $transactions = $this->itemModel->getTransactionHistoryByUserId($user_id);
         require __DIR__ . '/../views/profile/transactionHistoryView.php';
     }
+    public function edit($id)
+{
+    $collection = $this->collectionModel->getCollectionById($id);
+    $categorias = $this->collectionModel->getCategories();
+    $itemsWithoutCollection = $this->collectionModel->getItemsWithoutCollectionByUserId(AuthController::getAuthenticatedUserId());
+    $itemsInCollection = $this->collectionModel->getItemsByCollectionId($id);
+    require __DIR__ . '/../views/collections/edit.php';
+}
+
+public function update($id)
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
+            'name' => $_POST['name'],
+            'description' => $_POST['description'],
+            'categoria_id' => $_POST['categoria_id']
+        ];
+
+        $this->collectionModel->updateCollection($id, $data);
+
+        // Adicionar itens à coleção
+        if (isset($_POST['add_items']) && !empty($_POST['add_items'])) {
+            foreach ($_POST['add_items'] as $item_id) {
+                $this->collectionModel->addItemToCollection($id, $item_id);
+            }
+        }
+
+        // Remover itens da coleção
+        if (isset($_POST['remove_items']) && !empty($_POST['remove_items'])) {
+            foreach ($_POST['remove_items'] as $item_id) {
+                $this->collectionModel->removeItemFromCollection($id, $item_id);
+            }
+        }
+
+        header('Location: /collections/show/' . $id);
+    }
+}
+public function delete($id) {
+    try {
+        $this->collectionModel->deleteCollection($id);
+        header('Location: /collections');
+    } catch (\Exception $e) {
+        error_log('Erro ao eliminar coleção: ' . $e->getMessage());
+        die('Erro ao eliminar coleção.');
+    }
+}
+
 }

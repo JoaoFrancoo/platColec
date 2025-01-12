@@ -208,5 +208,17 @@ public function removeFromWishlist($user_id, $item_id)
     $stmt->bindParam(':item_id', $item_id);
     $stmt->execute();
 }
+public function getItemsWithoutCollectionByUser($user_id)
+{
+    try {
+        $query = "SELECT * FROM items WHERE user_id = :user_id AND collection_id IS NULL";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log('Erro ao buscar itens sem coleção: ' . $e->getMessage());
+        return [];
+    }
+}
 
     }

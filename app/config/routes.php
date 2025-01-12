@@ -37,6 +37,14 @@ return [
         'controller' => 'CollectionController',
         'action' => 'showCollectionItems'
     ],
+    'collections/edit/(\d+)' => [
+        'controller' => 'CollectionController',
+        'action' => 'edit'
+    ],
+    'collections/update' => [
+        'controller' => 'CollectionController',
+        'action' => 'update'
+    ],
     'profile' => [
         'controller' => 'CollectionController',
         'action' => 'profile'
@@ -85,20 +93,31 @@ return [
         'controller' => 'PageController',
         'action' => 'about'
     ],
-    'wishlist' => [ 
-        'controller' => 'ItemController', 
-        'action' => 'wishlist' 
-    ], 
-    'add_to_wishlist' => [ 
+    'wishlist' => [
         'controller' => 'ItemController',
-         'action' => 'addToWishlist' 
+        'action' => 'wishlist'
     ],
-    'remove_from_wishlist' => [ 
-    'controller' => 'ItemController',
-     'action' => 'removeFromWishlist'
+    'add_to_wishlist' => [
+        'controller' => 'ItemController',
+        'action' => 'addToWishlist'
     ],
-        'profile/update' => [
-            'controller' => 'AuthController',
-            'action' => 'updateProfile'
-        ]
-    ];
+    'remove_from_wishlist' => [
+        'controller' => 'ItemController',
+        'action' => 'removeFromWishlist'
+    ],
+    'profile/update' => [
+        'controller' => 'AuthController',
+        'action' => 'updateProfile'
+    ],
+    'collections/edit/(\d+)' => [
+        'controller' => 'CollectionController',
+        'action' => 'edit'
+    ],
+    'collections/update/(\d+)' => [
+        'controller' => 'CollectionController',
+        'action' => 'update'
+    ],
+    'collections/delete/(\d+)' => 
+    [ 'controller' => 'CollectionController', 
+    'action' => 'delete' ],
+];

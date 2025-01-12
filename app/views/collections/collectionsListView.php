@@ -5,7 +5,6 @@
         <div class="text-center mb-6">
             <a href="/collections/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition transform hover:scale-105 inline-block">Create New Collection</a>
         </div>
-        <!-- Dropdown para Seleção de Categorias -->
         <div class="text-center mb-6">
             <label for="categoria" class="block text-lg font-semibold mb-2">Selecione uma Categoria</label>
             <select id="categoria" name="categoria" class="bg-white border border-gray-300 px-4 py-2 rounded shadow">
@@ -28,6 +27,12 @@
                     <p class="text-gray-700 mb-2"><strong>Created by:</strong> <?php echo htmlspecialchars($collection['username']); ?></p>
                     <p class="text-gray-700 mb-2"><strong>Category:</strong> <?php echo htmlspecialchars($collection['categoria_nome']); ?></p>
                     <a href="/collections/show/<?php echo htmlspecialchars($collection['collection_id']); ?>" class="text-blue-500 mt-2 inline-block hover:underline">View Details</a>
+                    <?php if ($collection['user_id'] == $_SESSION['user_id']): ?>
+                        <a href="/collections/edit/<?php echo htmlspecialchars($collection['collection_id']); ?>" class="bg-green-500 text-white px-4 py-2 rounded mt-2 inline-block">Alterar Coleção</a>
+                        <form action="/collections/delete/<?php echo htmlspecialchars($collection['collection_id']); ?>" method="POST" class="inline-block">
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded mt-2 inline-block hover:bg-red-600 transition transform hover:scale-105">Eliminar Coleção</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -43,7 +48,6 @@
             }
         });
 
-        // Função para filtro de pesquisa
         document.getElementById('search').addEventListener('input', function() {
             var searchValue = this.value.toLowerCase();
             var collections = document.querySelectorAll('.collection-item');
