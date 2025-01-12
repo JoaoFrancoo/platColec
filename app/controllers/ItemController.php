@@ -134,7 +134,7 @@ class ItemController
         }
 
         $this->itemModel->updateItem($item_id, $data);
-        header('Location: /items');
+        header('Location: /market/items');
     }
 
     public function buy()
@@ -168,4 +168,23 @@ class ItemController
         $items = $this->itemModel->getAllItems();
         require __DIR__ . '/../views/market/marketItemsView.php';
     }
+    public function show($id)
+{
+    $item = $this->itemModel->getItemById($id);
+    
+    if (!$item) {
+        die('Item não encontrado');
+    }
+
+    // Obtenha o nome da coleção
+    $collectionName = $this->itemModel->getCollectionNameById($item['collection_id']);
+
+    $data = [
+        'item' => $item,
+        'collectionName' => $collectionName
+    ];
+
+    require __DIR__ . '/../views/items/itemDetailView.php';
+}
+
 }

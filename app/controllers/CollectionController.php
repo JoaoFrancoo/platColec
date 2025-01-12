@@ -19,13 +19,23 @@ class CollectionController
 
     public function index()
     {
-        $collections = $this->collectionModel->getAllCollections();
+        if (isset($_GET['categoria_id'])) {
+            $categoria_id = $_GET['categoria_id'];
+            $collections = $this->collectionModel->getCollectionsByCategoryId($categoria_id);
+        } else {
+            $collections = $this->collectionModel->getAllCollections();
+        }
+
+        // Buscar categorias através do modelo
+        $categorias = $this->collectionModel->getCategories();
+
         require __DIR__ . '/../views/collections/collectionsListView.php';
     }
 
     public function create()
     {
         $items = $this->itemModel->getItemsWithoutCollection();
+        $categorias = $this->collectionModel->getCategories();
         require __DIR__ . '/../views/collections/collectionsCreateView.php';
     }
 
@@ -35,7 +45,8 @@ class CollectionController
         $data = [
             'user_id' => $user_id,
             'name' => $_POST['name'],
-            'description' => $_POST['description']
+            'description' => $_POST['description'],
+            'category_id' => $_POST['category_id'] // Incluindo a categoria na criação da coleção
         ];
 
         $collection_id = $this->collectionModel->createCollection($data);
@@ -61,6 +72,7 @@ class CollectionController
         $items = $this->collectionModel->getItemsByCollectionId($collectionId);
         require __DIR__ . '/../views/collections/collectionsItemsView.php';
     }
+
     public function profile()
     {
         $user_id = AuthController::getAuthenticatedUserId();

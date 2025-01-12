@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Collection</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+<?php
+include '../app/views/layout/header.php'; 
+?>
 <body class="bg-gray-100 p-6">
     <h1 class="text-2xl font-bold mb-4">Create New Collection</h1>
     <form action="/collections/store" method="post" class="bg-white p-6 rounded shadow-md">
@@ -32,3 +27,4 @@
     </form>
 </body>
 </html>
+<?php include '../app/views/layout/footer.php'; ?>

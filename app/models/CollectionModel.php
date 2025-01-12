@@ -13,16 +13,35 @@ class CollectionModel {
         $this->pdo = Database::getInstance()->getConnection();
     }
 
-    public function getAllCollections() {
-        try {
-            $stmt = $this->pdo->prepare('SELECT * FROM collections');
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log('Erro ao buscar todas as coleções: ' . $e->getMessage());
-            return [];
-        }
-    }
+    public function getAllCollections()
+{
+    $sql = "
+        SELECT collections.*, users.username, categorias.nome AS categoria_nome
+        FROM collections
+        JOIN users ON collections.user_id = users.id
+        LEFT JOIN categorias ON     collections.categoria_id = categorias.id
+    ";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getCollectionsByCategoryId($categoryId)
+{
+    $sql = "
+        SELECT collections.*, users.username, categorias.nome AS categoria_nome
+        FROM collections
+        JOIN users ON collections.user_id = users.id
+        LEFT JOIN categorias ON collections.categoria_id = categorias.id
+        WHERE collections.categoria_id = :categoryId
+    ";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+    
 
     public function createCollection($data) {
         $query = "INSERT INTO collections (user_id, name, description) 
@@ -96,4 +115,12 @@ class CollectionModel {
             return [];
         }
     }
+    public function getCategories()
+{
+    $sql = "SELECT * FROM categorias";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

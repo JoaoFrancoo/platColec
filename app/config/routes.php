@@ -29,7 +29,7 @@ return [
         'controller' => 'CollectionController',
         'action' => 'store'
     ],
-    'collection/show/(\d+)' => [
+    'collections/show/(\d+)' => [
         'controller' => 'CollectionController',
         'action' => 'show'
     ],
@@ -76,5 +76,13 @@ return [
     'market/buy' => [
         'controller' => 'ItemController',
         'action' => 'buy'
+    ],
+    'items/buy' => [
+        'controller' => 'ItemController',
+        'action' => 'buy'
+    ],
+    'sobre-nos' => [
+        'controller' => 'PageController',
+        'action' => 'about'
     ]
 ];

@@ -157,12 +157,21 @@ class ItemModel {
             throw new \Exception('Item sem estoque.');
         }
 
-        // Reduz o estoque
         $stmt = $this->pdo->prepare('UPDATE items SET stock = stock - 1 WHERE item_id = ?');
         $stmt->execute([$itemId]);
 
-        // Adiciona o item ao perfil do usuário
         $stmt = $this->pdo->prepare('INSERT INTO user_items (user_id, item_id, purchase_date) VALUES (?, ?, NOW())');
         return $stmt->execute([$userId, $itemId]);
     }
+    
+    public function getCollectionNameById($collection_id)
+    {
+        $stmt = $this->pdo->prepare('SELECT name FROM collections WHERE collection_id = :collection_id');
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['name'] : null;
+    }
+
+
 }
