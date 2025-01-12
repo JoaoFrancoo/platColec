@@ -4,17 +4,20 @@ namespace App\Controllers;
 
 use App\Models\CollectionModel;
 use App\Models\ItemModel;
+use App\Models\User;
 use App\Controllers\AuthController;
 
 class CollectionController
 {
     private $collectionModel;
     private $itemModel;
+    private $userModel;
 
     public function __construct()
     {
         $this->collectionModel = new CollectionModel();
         $this->itemModel = new ItemModel();
+        $this->userModel = new User();
     }
 
     public function index()
@@ -75,9 +78,20 @@ class CollectionController
 
     public function profile()
     {
-        $user_id = AuthController::getAuthenticatedUserId();
+        session_start();
+
+        if (!isset($_SESSION['user_id'])) {
+            die("User not authenticated.");
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Carregar informações do usuário
+        $user = $this->userModel->getUserById($user_id);
         $collections = $this->collectionModel->getCollectionsByUserId($user_id);
         $items = $this->itemModel->getPurchasedItemsByUserId($user_id);
+        $wishlistItems = $this->itemModel->getWishlistItems($user_id);
+
         require __DIR__ . '/../views/profile/profileView.php';
     }
 

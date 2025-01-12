@@ -28,14 +28,18 @@
                         </tr>
                     </tbody>
                 </table>
-                <?php if ($item['stock'] == 0): ?>
-                    <button class="bg-red-500 text-white px-4 py-2 rounded cursor-not-allowed mt-4" disabled>Esgotado</button>
+                <?php if ($item['user_id'] == $_SESSION['user_id']): ?>
+                    <a href="/items/edit/<?php echo htmlspecialchars($item['item_id']); ?>" class="bg-green-500 text-white px-4 py-2 rounded mt-4 inline-block">Editar Item</a>
                 <?php else: ?>
-                    <form action="/market/buy" method="POST" class="mt-4">
-                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($authenticated_user_id); ?>">
-                        <input type="hidden" name="item_id" value="<?php echo htmlspecialchars($item['item_id']); ?>">
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Comprar Item</button>
-                    </form>
+                    <?php if ($item['stock'] == 0): ?>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded cursor-not-allowed mt-4" disabled>Esgotado</button>
+                    <?php else: ?>
+                        <form action="/market/buy" method="POST" class="mt-4">
+                            <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                            <input type="hidden" name="item_id" value="<?php echo htmlspecialchars($item['item_id']); ?>">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Comprar Item</button>
+                        </form>
+                    <?php endif; ?>
                 <?php endif; ?>
                 <a href="/market/items" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded inline-block">Voltar aos Itens</a>
             </div>

@@ -163,7 +163,7 @@ class ItemModel {
         $stmt = $this->pdo->prepare('INSERT INTO user_items (user_id, item_id, purchase_date) VALUES (?, ?, NOW())');
         return $stmt->execute([$userId, $itemId]);
     }
-    
+
     public function getCollectionNameById($collection_id)
     {
         $stmt = $this->pdo->prepare('SELECT name FROM collections WHERE collection_id = :collection_id');
@@ -172,6 +172,41 @@ class ItemModel {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ? $row['name'] : null;
     }
-
-
+    public function addToWishlist($user_id, $item_id)
+    {
+        $query = "INSERT INTO wishlists (user_id, item_id) VALUES (:user_id, :item_id)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':item_id', $item_id);
+        $stmt->execute();
+    }
+    
+    public function getWishlistItems($user_id)
+    {
+        $query = "SELECT items.* FROM items 
+                  JOIN wishlists ON items.item_id = wishlists.item_id 
+                  WHERE wishlists.user_id = :user_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function isInWishlist($user_id, $item_id)
+{
+    $query = "SELECT COUNT(*) FROM wishlists WHERE user_id = :user_id AND item_id = :item_id";
+    $stmt = $this->pdo->prepare($query);
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindParam(':item_id', $item_id);
+    $stmt->execute();
+    return $stmt->fetchColumn() > 0;
 }
+public function removeFromWishlist($user_id, $item_id)
+{
+    $query = "DELETE FROM wishlists WHERE user_id = :user_id AND item_id = :item_id";
+    $stmt = $this->pdo->prepare($query);
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindParam(':item_id', $item_id);
+    $stmt->execute();
+}
+
+    }

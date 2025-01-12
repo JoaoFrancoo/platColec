@@ -84,5 +84,21 @@ return [
     'sobre-nos' => [
         'controller' => 'PageController',
         'action' => 'about'
-    ]
-];
+    ],
+    'wishlist' => [ 
+        'controller' => 'ItemController', 
+        'action' => 'wishlist' 
+    ], 
+    'add_to_wishlist' => [ 
+        'controller' => 'ItemController',
+         'action' => 'addToWishlist' 
+    ],
+    'remove_from_wishlist' => [ 
+    'controller' => 'ItemController',
+     'action' => 'removeFromWishlist'
+    ],
+        'profile/update' => [
+            'controller' => 'AuthController',
+            'action' => 'updateProfile'
+        ]
+    ];

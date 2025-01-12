@@ -22,7 +22,7 @@ $user = $authController->getAuthenticatedUser();
     <header class="bg-blue-600 text-white py-4">
         <div class="container mx-auto flex justify-between items-center px-4">
             <div class="text-lg font-bold">
-                <a href="/" class="hover:text-gray-200">Colecionismo</a>
+                <a href="/" class="hover:text-gray-200">PlatColec</a>
             </div>
             <nav class="hidden md:flex">
                 <ul class="flex space-x-4">
